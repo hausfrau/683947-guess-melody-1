@@ -1,0 +1,41 @@
+import {SETTINGS} from './data/game-data';
+
+export const getScore = (answers) => {
+  if (answers.length < SETTINGS.neededAnswersCount) {
+    return -1;
+  }
+
+  let score = 0;
+
+  answers.forEach((it) => {
+    if (!it.answerSuccess) {
+      score += SETTINGS.errorAnswerScore;
+    } else if (it.answerTime < SETTINGS.fastTime) {
+      score += SETTINGS.successFastAnswerScore;
+    } else {
+      score += SETTINGS.successAnswerScore;
+    }
+
+  });
+
+  return score;
+};
+
+export const getResult = (results, result) => {
+  const score = result.score;
+  if (result.leftTime === 0) {
+    return `Время вышло! Вы не успели отгадать все мелодии`;
+  }
+
+  if (result.leftNotes === 0) {
+    return `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
+  }
+
+  let scores = results.map((it) => it.score);
+  scores.push(score);
+  scores = scores.sort((first, second) => second - first);
+  const rating = scores.indexOf(score) + 1;
+  const gamersCount = scores.length;
+
+  return `Вы заняли ${rating} место из ${gamersCount} игроков. Это лучше, чем у ${(gamersCount - rating) * 100 / gamersCount}% игроков`;
+};
