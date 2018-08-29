@@ -250,19 +250,19 @@ const mokeResult = (score_, leftNotes_, leftTime_) => ({
 });
 
 describe(`Check getResult()`, () => {
-  it(`should return time is over`, () => {
+  it(`should return time is over when lefttime is 0`, () => {
     assert.equal(`Время вышло! Вы не успели отгадать все мелодии`, getResult(results, mokeResult(3, 1, 0)));
   });
 
-  it(`should return tries is over`, () => {
+  it(`should return tries is over when leftnotes is 0`, () => {
     assert.equal(`У вас закончились все попытки. Ничего, повезёт в следующий раз!`, getResult(results, mokeResult(3, 0, 1)));
   });
 
-  it(`should return the first place from 10`, () => {
+  it(`should return the first place from 10 when score is 10`, () => {
     assert.equal(`Вы заняли 1 место из 10 игроков. Это лучше, чем у 90% игроков`, getResult(results, mokeResult(10, 1, 10000)));
   });
 
-  it(`should return the 4 place from 10`, () => {
-    assert.equal(`Вы заняли 1 место из 10 игроков. Это лучше, чем у 90% игроков`, getResult(results, mokeResult(10, 1, 10000)));
+  it(`should return the 3 place from 10 when score is 7`, () => {
+    assert.equal(`Вы заняли 3 место из 10 игроков. Это лучше, чем у 70% игроков`, getResult(results, mokeResult(7, 1, 10000)));
   });
 });

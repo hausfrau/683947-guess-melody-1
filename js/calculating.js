@@ -1,13 +1,12 @@
 import {SETTINGS} from './data/game-data';
 
 export const getScore = (answers, _leftNotes) => {
-  if (answers.length < SETTINGS.neededAnswersCount) {
+  if (answers.length < SETTINGS.questionsCount) {
     return -1;
   }
 
   let score = answers.reduce((sum, current) => {
-    sum += current.result;
-    return sum;
+    return sum + current.result;
   }, 0);
 
   return score;
