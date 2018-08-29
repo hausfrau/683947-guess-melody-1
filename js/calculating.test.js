@@ -5,193 +5,193 @@ describe(`Check getScore()`, () => {
   it(`should return -1 when not all answers`, () => {
     assert.equal(-1, getScore([
       {
-        answerSuccess: true,
-        answerTime: 12000
+        result: 1,
+        time: 12000
       },
       {
-        answerSuccess: true,
-        answerTime: 12000
-      }]));
+        result: 1,
+        time: 12000
+      }], 0));
   });
 
-  it(`should return 10 when all success not fast answers`, () => {
+  it(`should return 10 when all correct and not fast answers`, () => {
     assert.equal(10, getScore([
       {
-        answerSuccess: true,
-        answerTime: 35000
+        result: 1,
+        time: 35000
       },
       {
-        answerSuccess: true,
-        answerTime: 35000
+        result: 1,
+        time: 35000
       },
       {
-        answerSuccess: true,
-        answerTime: 35000
+        result: 1,
+        time: 35000
       },
       {
-        answerSuccess: true,
-        answerTime: 35000
+        result: 1,
+        time: 35000
       },
       {
-        answerSuccess: true,
-        answerTime: 35000
+        result: 1,
+        time: 35000
       },
       {
-        answerSuccess: true,
-        answerTime: 35000
+        result: 1,
+        time: 35000
       },
       {
-        answerSuccess: true,
-        answerTime: 35000
+        result: 1,
+        time: 35000
       },
       {
-        answerSuccess: true,
-        answerTime: 35000
+        result: 1,
+        time: 35000
       },
       {
-        answerSuccess: true,
-        answerTime: 35000
+        result: 1,
+        time: 35000
       },
       {
-        answerSuccess: true,
-        answerTime: 35000
+        result: 1,
+        time: 35000
       }
-    ]));
+    ], 0));
   });
 
-  it(`should return 20 when all success fast answers`, () => {
+  it(`should return 20 when all correct fast answers`, () => {
     assert.equal(20, getScore([
       {
-        answerSuccess: true,
-        answerTime: 10000
+        result: 2,
+        time: 10000
       },
       {
-        answerSuccess: true,
-        answerTime: 10000
+        result: 2,
+        time: 10000
       },
       {
-        answerSuccess: true,
-        answerTime: 10000
+        result: 2,
+        time: 10000
       },
       {
-        answerSuccess: true,
-        answerTime: 10000
+        result: 2,
+        time: 10000
       },
       {
-        answerSuccess: true,
-        answerTime: 10000
+        result: 2,
+        time: 10000
       },
       {
-        answerSuccess: true,
-        answerTime: 10000
+        result: 2,
+        time: 10000
       },
       {
-        answerSuccess: true,
-        answerTime: 10000
+        result: 2,
+        time: 10000
       },
       {
-        answerSuccess: true,
-        answerTime: 10000
+        result: 2,
+        time: 10000
       },
       {
-        answerSuccess: true,
-        answerTime: 10000
+        result: 2,
+        time: 10000
       },
       {
-        answerSuccess: true,
-        answerTime: 10000
+        result: 2,
+        time: 10000
       }
-    ]));
+    ], 0));
   });
 
   it(`should return -20 when all error answers`, () => {
     assert.equal(-20, getScore([
       {
-        answerSuccess: false,
-        answerTime: 35000
+        result: -2,
+        time: 35000
       },
       {
-        answerSuccess: false,
-        answerTime: 3000
+        result: -2,
+        time: 3000
       },
       {
-        answerSuccess: false,
-        answerTime: 1000
+        result: -2,
+        time: 1000
       },
       {
-        answerSuccess: false,
-        answerTime: 8000
+        result: -2,
+        time: 8000
       },
       {
-        answerSuccess: false,
-        answerTime: 35000
+        result: -2,
+        time: 35000
       },
       {
-        answerSuccess: false,
-        answerTime: 15000
+        result: -2,
+        time: 15000
       },
       {
-        answerSuccess: false,
-        answerTime: 7000
+        result: -2,
+        time: 7000
       },
       {
-        answerSuccess: false,
-        answerTime: 5000
+        result: -2,
+        time: 5000
       },
       {
-        answerSuccess: false,
-        answerTime: 35000
+        result: -2,
+        time: 35000
       },
       {
-        answerSuccess: false,
-        answerTime: 3000
+        result: -2,
+        time: 3000
       }
-    ]));
+    ], 0));
   });
 
-  it(`should return 0 when half success fast answers and half error answers`, () => {
+  it(`should return 0 when half error answers and half correct fast answers`, () => {
     assert.equal(0, getScore([
       {
-        answerSuccess: false,
-        answerTime: 35000
+        result: -2,
+        time: 35000
       },
       {
-        answerSuccess: false,
-        answerTime: 3000
+        result: -2,
+        time: 3000
       },
       {
-        answerSuccess: false,
-        answerTime: 1000
+        result: -2,
+        time: 1000
       },
       {
-        answerSuccess: false,
-        answerTime: 8000
+        result: -2,
+        time: 8000
       },
       {
-        answerSuccess: false,
-        answerTime: 35000
+        result: -2,
+        time: 35000
       },
       {
-        answerSuccess: true,
-        answerTime: 15000
+        result: 2,
+        time: 15000
       },
       {
-        answerSuccess: true,
-        answerTime: 7000
+        result: 2,
+        time: 7000
       },
       {
-        answerSuccess: true,
-        answerTime: 5000
+        result: 2,
+        time: 5000
       },
       {
-        answerSuccess: true,
-        answerTime: 29000
+        result: 2,
+        time: 29000
       },
       {
-        answerSuccess: true,
-        answerTime: 3000
+        result: 2,
+        time: 3000
       }
-    ]));
+    ], 0));
   });
 });
 

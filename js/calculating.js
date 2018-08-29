@@ -1,22 +1,14 @@
 import {SETTINGS} from './data/game-data';
 
-export const getScore = (answers) => {
+export const getScore = (answers, _leftNotes) => {
   if (answers.length < SETTINGS.neededAnswersCount) {
     return -1;
   }
 
-  let score = 0;
-
-  answers.forEach((it) => {
-    if (!it.answerSuccess) {
-      score += SETTINGS.errorAnswerScore;
-    } else if (it.answerTime < SETTINGS.fastTime) {
-      score += SETTINGS.successFastAnswerScore;
-    } else {
-      score += SETTINGS.successAnswerScore;
-    }
-
-  });
+  let score = answers.reduce((sum, current) => {
+    sum += current.result;
+    return sum;
+  }, 0);
 
   return score;
 };
