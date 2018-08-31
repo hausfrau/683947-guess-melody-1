@@ -10,7 +10,47 @@ const _getSeconds = (secs) => {
   return seconds;
 };
 
-export const getStringTime = (millisecs) => {
-  const secs = millisecs / 1000;
+export const getStringTime = (milliseconds) => {
+  if (typeof milliseconds !== `number`) {
+    throw new Error(`Time should be of type number`);
+  }
+
+  if (milliseconds < 0) {
+    throw new Error(`Time should not be negative value`);
+  }
+
+  const secs = milliseconds / 1000;
   return `${_getMinutes(secs)}:${_getSeconds(secs)}`;
+};
+
+export const reduceLeftTime = (state, milliseconds) => {
+  if (typeof milliseconds !== `number`) {
+    throw new Error(`Milliseconds should be of type number`);
+  }
+
+  if (milliseconds < 0) {
+    throw new Error(`Milliseconds should not be negative value`);
+  }
+
+  let leftTime = state.leftTime - milliseconds;
+
+  const currentState = Object.assign({}, state, {
+    leftTime
+  });
+  return currentState;
+};
+
+export const changeLeftTime = (state, leftTime) => {
+  if (typeof leftTime !== `number`) {
+    throw new Error(`LeftTime should be of type number`);
+  }
+
+  if (leftTime < 0) {
+    throw new Error(`LeftTime should not be negative value`);
+  }
+
+  const currentState = Object.assign({}, state, {
+    leftTime
+  });
+  return currentState;
 };
