@@ -4,7 +4,10 @@ import welcomeScreen from './welcome';
 import failTriesScreen from './fail-tries';
 import failTimeScreen from './fail-time';
 import resultSuccessScreen from './result-success';
+import {loadAudio} from "./audio";
 
+let audio;
+let playButtons;
 
 const gameGenreScreen = (data, state) => {
   const template = `
@@ -52,6 +55,7 @@ const gameGenreScreen = (data, state) => {
 
   gameLogo.addEventListener(`click`, () => {
     clearActions();
+    audio.pause();
     changeScreen(welcomeScreen(Object.assign({}, state, {
       'screen': `screen-0`
     })));
@@ -65,14 +69,17 @@ const gameGenreScreen = (data, state) => {
 
   gameSubmit.addEventListener(`click`, () => {
     if (state.leftNotes === 0) {
+      audio.pause();
       changeScreen(failTriesScreen(Object.assign({}, state, {
         'screen': `screen-3`
       })));
     } else if (state.leftTime === 0) {
+      audio.pause();
       changeScreen(failTimeScreen(Object.assign({}, state, {
         'screen': `screen-4`
       })));
     } else {
+      audio.pause();
       changeScreen(resultSuccessScreen(Object.assign({}, state, {
         'screen': `screen-5`
       })));
@@ -82,6 +89,39 @@ const gameGenreScreen = (data, state) => {
   toggleGameSubmit(true);
 
   return genreScreenElement;
+};
+
+export const loadGenreTrack = (link) => {
+  audio = loadAudio(link);
+  playButtons = document.querySelectorAll(`.track__button`);
+  playButtons[0].classList.remove(`track__button--play`);
+  playButtons[0].classList.add(`track__button--pause`);
+};
+
+export const bindGenrePlayButtonListener = () => {
+  playButtons = document.querySelectorAll(`.track__button`);
+
+  const pauseAllTracks = () => {
+    Array.from(playButtons).forEach((it) => {
+      it.classList.remove(`track__button--pause`);
+      it.classList.add(`track__button--play`);
+    });
+  };
+
+  Array.from(playButtons).forEach((it) => it.addEventListener(`click`, () => {
+    it.addEventListener(`click`, () => {
+      pauseAllTracks();
+      if (it.classList.contains(`track__button--pause`)) {
+        audio.pause();
+        it.classList.remove(`track__button--pause`);
+        it.classList.add(`track__button--play`);
+      } else {
+        audio.play();
+        it.classList.remove(`track__button--play`);
+        it.classList.add(`track__button--pause`);
+      }
+    });
+  }));
 };
 
 export default gameGenreScreen;

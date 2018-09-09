@@ -1,7 +1,7 @@
 let loaded = false;
 let played = false;
 
-export const _loadAudio = (link) => {
+export const loadAudio = (link) => {
   loaded = false;
   played = false;
   const audio = new Audio();
@@ -17,6 +17,8 @@ export const _loadAudio = (link) => {
 
   audio.src = link;
   audio.load();
+
+  return audio;
 };
 
 export const _isLoaded = () => loaded;

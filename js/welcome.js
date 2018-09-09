@@ -1,8 +1,8 @@
 import {changeScreen, renderScreen} from './util';
-import {SETTINGS} from './data/game.js';
+import {SETTINGS} from './data/game';
 import GAME from './data/game-data';
 import {getMinutesFromMilliseconds} from './timer';
-import gameArtistScreen from './game-artist';
+import gameArtistScreen, {bindPlayButtonListener, loadTrack} from './game-artist';
 
 const template = `
 <section class="welcome">
@@ -24,9 +24,15 @@ const welcomeScreen = (state) => {
 
   const welcomeButton = welcomeScreenElement.querySelector(`.welcome__button`);
 
-  welcomeButton.addEventListener(`click`, () => changeScreen(gameArtistScreen(GAME[`screen-1`], Object.assign({}, state, {
-    'screen': `screen-1`
-  }))));
+  welcomeButton.addEventListener(`click`, () => {
+    changeScreen(gameArtistScreen(GAME[`screen-1`], Object.assign({}, state, {
+      'screen': `screen-1`
+    })));
+
+    loadTrack(GAME[`screen-1`].questions[0].src);
+
+    bindPlayButtonListener();
+  });
 
   return welcomeScreenElement;
 };

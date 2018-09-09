@@ -7,6 +7,11 @@ const GAME = {
     title: `Кто исполняет эту песню?`,
     questions: [
       {
+        artist: `Kevin MacLeod`,
+        name1: `Long Stroll`,
+        image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`,
+        src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
+        genre: `Jazz`,
         picture: `http://placehold.it/134x134`,
         name: `Пелагея`,
         isCorrect: true,
