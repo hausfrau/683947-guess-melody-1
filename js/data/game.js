@@ -59,9 +59,9 @@ export const reduceLeftNotes = (_state, notes) => {
     throw new Error(`Notes should not be negative value`);
   }
 
-  let leftNotes = state.leftNotes - notes;
+  let leftNotes = _state.leftNotes - notes;
 
-  const currentState = Object.assign({}, state, {
+  const currentState = Object.assign({}, _state, {
     leftNotes
   });
   return currentState;
