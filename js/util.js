@@ -11,4 +11,5 @@ export const changeScreen = (screen) => {
   main.appendChild(screen);
 };
 
-export const getOneOfThreeRandomInt = () => Math.round(Math.random() * 2);
+export const _getOneOfThreeRandomInt = () => Math.round(Math.random() * 2);
+

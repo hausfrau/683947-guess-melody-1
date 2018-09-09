@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {INITIAL_STATE, changeScreenLevel, changeLeftNotes, reduceLeftNotes} from './game-data';
+import {INITIAL_STATE, changeScreenLevel, changeLeftNotes, reduceLeftNotes} from './game';
 
 describe(`Check screen level changer`, () => {
   it(`should update screen level of the game`, () => {

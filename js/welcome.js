@@ -1,5 +1,8 @@
-import {changeScreen, renderScreen} from './util.js';
-import gameArtistScreen from './game-artist.js';
+import {changeScreen, renderScreen} from './util';
+import {SETTINGS} from './data/game.js';
+import GAME from './data/game-data';
+import {getMinutesFromMilliseconds} from './timer';
+import gameArtistScreen from './game-artist';
 
 const template = `
 <section class="welcome">
@@ -8,16 +11,24 @@ const template = `
     <h2 class="welcome__rules-title">Правила игры</h2>
     <p class="welcome__text">Правила просты:</p>
     <ul class="welcome__rules-list">
-      <li>За 5 минут нужно ответить на все вопросы.</li>
-      <li>Можно допустить 3 ошибки.</li>
+      <li>За ${getMinutesFromMilliseconds(SETTINGS.totalTime)} минут нужно ответить на все вопросы.</li>
+      <li>Можно допустить ${SETTINGS.mistakesCount} ошибки.</li>
     </ul>
     <p class="welcome__text">Удачи!</p>
   </section>`;
 
-const welcomeScreen = renderScreen(template);
+let welcomeScreenElement;
 
-const welcomeButton = welcomeScreen.querySelector(`.welcome__button`);
+const welcomeScreen = (state) => {
+  welcomeScreenElement = renderScreen(template);
 
-welcomeButton.addEventListener(`click`, () => changeScreen(gameArtistScreen));
+  const welcomeButton = welcomeScreenElement.querySelector(`.welcome__button`);
+
+  welcomeButton.addEventListener(`click`, () => changeScreen(gameArtistScreen(GAME[`screen-1`], Object.assign({}, state, {
+    'screen': `screen-1`
+  }))));
+
+  return welcomeScreenElement;
+};
 
 export default welcomeScreen;

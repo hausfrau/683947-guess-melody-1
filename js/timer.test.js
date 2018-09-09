@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {INITIAL_STATE} from "./data/game-data";
+import {INITIAL_STATE} from "./data/game";
 import {getStringTime, reduceLeftTime, changeLeftTime} from './timer';
 
 describe(`Check getStringTime()`, () => {

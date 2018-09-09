@@ -1,8 +1,8 @@
 import {changeScreen, renderScreen} from './util.js';
 import welcomeScreen from './welcome.js';
-import {clearActions} from './game-genre.js';
 
-const template = `
+const failTriesScreen = (state) => {
+  const template = `
   <section class="result">
     <div class="result__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"></div>
     <h2 class="result__title">Какая жалость!</h2>
@@ -10,13 +10,17 @@ const template = `
     <button class="result__replay" type="button">Попробовать ещё раз</button>
   </section>`;
 
-const failTriesScreen = renderScreen(template);
+  const failTriesElement = renderScreen(template);
 
-const resultReplay = failTriesScreen.querySelector(`.result__replay`);
+  const resultReplay = failTriesElement.querySelector(`.result__replay`);
 
-resultReplay.addEventListener(`click`, () => {
-  clearActions();
-  changeScreen(welcomeScreen);
-});
+  resultReplay.addEventListener(`click`, () => {
+    changeScreen(welcomeScreen(Object.assign({}, state, {
+      'screen': `screen-0`
+    })));
+  });
+
+  return failTriesElement;
+};
 
 export default failTriesScreen;

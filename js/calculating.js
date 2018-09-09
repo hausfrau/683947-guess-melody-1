@@ -1,4 +1,4 @@
-import {SETTINGS} from './data/game-data';
+import {SETTINGS} from './data/game';
 
 export const getScore = (answers, _leftNotes) => {
   if (answers.length < SETTINGS.questionsCount) {

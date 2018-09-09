@@ -1,10 +1,16 @@
-const _getMinutes = (secs) => {
+export const getMinutesFromMilliseconds = (milliseconds) => {
+  return Math.floor(milliseconds / 1000 / 60) % 60;
+};
+
+export const getMinutes = (milliseconds) => {
+  const secs = milliseconds / 1000;
   let minutes = Math.floor(secs / 60) % 60;
   minutes = minutes < 10 ? `0${minutes}` : minutes;
   return minutes;
 };
 
-const _getSeconds = (secs) => {
+export const getSeconds = (milliseconds) => {
+  const secs = milliseconds / 1000;
   let seconds = Math.round(secs % 60);
   seconds = seconds < 10 ? `0${seconds}` : seconds;
   return seconds;
@@ -19,8 +25,7 @@ export const getStringTime = (milliseconds) => {
     throw new Error(`Time should not be negative value`);
   }
 
-  const secs = milliseconds / 1000;
-  return `${_getMinutes(secs)}:${_getSeconds(secs)}`;
+  return `${getMinutes(milliseconds)}:${getSeconds(milliseconds)}`;
 };
 
 export const reduceLeftTime = (state, milliseconds) => {
